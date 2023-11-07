@@ -1,4 +1,3 @@
--- Define the leader
 vim.g.mapleader = " "  -- Set leader key to spacebar
 
 -- Helper functions
@@ -17,6 +16,8 @@ end
 -- https://github.com/roobert/tailwindcss-colorizer-cmp.nvim
 -- https://github.com/NvChad/nvim-colorizer.lua
 
+
+
 -- Plugin configuration
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
@@ -25,25 +26,45 @@ require('packer').startup(function(use)
   'folke/tokyonight.nvim', 
 }  
 
-    use 'neovim/nvim-lspconfig' -- LSP
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
+use 'neovim/nvim-lspconfig' -- LSP
+use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+  config = function() require('lualine').setup() end
+}
 
-  -- Autocompletion plugins
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-  use 'hrsh7th/cmp-buffer' -- Buffer source for nvim-cmp
-  use 'hrsh7th/cmp-path' -- Path source for nvim-cmp
-  use 'hrsh7th/cmp-cmdline' -- Cmdline source for nvim-cmp
-  use 'saadparwaiz1/cmp_luasnip' -- Snippet source for nvim-cmp
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+-- Autocompletion plugins
+use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+use 'hrsh7th/cmp-buffer' -- Buffer source for nvim-cmp
+use 'hrsh7th/cmp-path' -- Path source for nvim-cmp
+use 'hrsh7th/cmp-cmdline' -- Cmdline source for nvim-cmp
+use 'saadparwaiz1/cmp_luasnip' -- Snippet source for nvim-cmp
+use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
-  -- Make scrolling seem smoother
-  use 'karb94/neoscroll.nvim'
-  -- Which-key displays what key does what
-  use 'folke/which-key.nvim'
 
-  -- Treesitter configuration
+-- Make scrolling seem smoother
+use 'karb94/neoscroll.nvim'
+-- Which-key displays what key does what
+use 'folke/which-key.nvim'
+use {
+  'folke/flash.nvim',
+  config = function()
+    -- Setup configuration for 'flash.nvim'
+    require'flash'.setup({
+      -- Configuration options go here
+    })
+
+    -- Keybinds for using flash, navigation after search
+    local flash = require('flash')
+    vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require('flash').jump()<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', '<leader>F', "<cmd>lua require('flash').treesitter()<CR>", { noremap = true, silent = true })
+    -- Add other keybinds if necessary
+  end
+}
+
+
+-- Treesitter configuration
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -122,7 +143,7 @@ require('packer').startup(function(use)
 
   -- Other plugins
   use 'petertriho/nvim-scrollbar' -- Scrollbar plugin
-  use 'preservim/tagbar' -- Tagbar plugin
+  -- use 'preservim/tagbar' -- Tagbar plugin
   use 'vim-scripts/RltvNmbr.vim' -- Relative number plugin
   use {
     'romgrk/barbar.nvim', -- Tabline plugin
@@ -156,7 +177,8 @@ require('packer').startup(function(use)
     end 
   }
 end)
--- First, we require the necessary modules
+
+
 local cmp = require'cmp'
 local lspconfig = require'lspconfig'
 
@@ -205,55 +227,13 @@ lspconfig.pyright.setup{
     capabilities = capabilities, -- Pass the updated capabilities here
 }
 
-vim.cmd [[
-  highlight Normal guibg=NONE ctermbg=NONE
-  highlight NormalNC guibg=NONE ctermbg=NONE
-  highlight NvimTreeNormal guibg=NONE ctermbg=NONE
-  highlight NvimTreeNormalNC guibg=NONE ctermbg=NONE
-]]
-
 -- Set default tab width
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true -- Convert tabs to spaces
 
-
--- Set the theme for airline statusbar --
-vim.cmd('let g:airline_theme="dark"')
-
 -- Set the file underline color to white 
 vim.api.nvim_set_hl(0, 'CursorLine', {underline = true, sp = 'white'})
-
--- The settings for the nivm-tree icons --
-require'nvim-web-devicons'.setup {
-  color_icons = true,
-  default = true,
-  strict = true,
-}
-
-vim.cmd [[
-  filetype plugin indent on
-  syntax enable
-]]
-
--- Auto-detect fold method based on filetype
-vim.api.nvim_create_autocmd("FileType", {  
-  pattern = "*",
-  callback = function()
-    local syntax = vim.api.nvim_buf_get_option(0, 'syntax')
-    if syntax and vim.fn.exists('b:current_syntax') then
-      vim.wo.foldmethod = 'syntax'
-    else
-      vim.wo.foldmethod = 'indent' -- Or 'expr' if you have a custom fold expression
-    end
-  end
-})
-
--- General settings for folds
-vim.opt.foldenable = true -- Enable folding
-vim.opt.foldlevelstart = 99 -- Start with all folds open
-vim.opt.foldnestmax = 10 -- Deepest fold is 10 levels
-vim.opt.foldminlines = 1 -- Minimum lines for a fold is 1
 
 -- Make the default search not to be casesensetive
 vim.opt.ignorecase = true
@@ -275,17 +255,20 @@ vim.cmd [[
 
 
 -- Keybindings
-vim.cmd('command! ExploreT NvimTreeToggle')
+-- Toggle the file explorer
+vim.api.nvim_set_keymap('n', '<leader>r', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-- Open the config file
+vim.api.nvim_set_keymap('n', '<leader>cf', ':edit $MYVIMRC<CR>', { noremap = true, silent = true })
 
 -- LSP hover keybinding
 vim.api.nvim_set_keymap('n', 'P', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+
 -- Binding telescope to commands --
-vim.cmd [[
-  command! FindFiles Telescope find_files
-  command! LiveGrep Telescope live_grep
-  command! Buffers Telescope buffers
-  command! HelpTags Telescope help_tags
-]]
+vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', ':Telescope buffers<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fh', ':Telescope help_tags<CR>', { noremap = true, silent = true })
 
 -- Keybinds for buffer tabs --
 -- These commands will navigate through buffers in order rather than actual tabs
@@ -295,5 +278,6 @@ vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferPrevious<CR>', {noremap = true, 
 -- Bind the exit termnal mode to ctrl + n --
 vim.api.nvim_set_keymap('t', '<C-n>', '<C-\\><C-n>', { noremap = true })
 
+local remaps = require("remaps")
 local plugins = require('plugins')
 local themes = require("themes")
