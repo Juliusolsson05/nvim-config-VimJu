@@ -1,1 +1,1 @@
-# Julius Olsson Neovin config
+# Julius Olsson Neovim config
