@@ -36,6 +36,18 @@ I'm always open to discussing technology, programming, and potential collaborati
 - [Email](mailto:julius.olsson05@gmail.com)
 - [Website](https://www.nordwebb.com) (In Swedish)
 
+## My Modifications
+
+In my quest to optimize my development workflow, I've added a couple of custom scripts to my Neovim configuration. These scripts help me debug and navigate projects more efficiently.
+
+### Python Terminal Error Formatter
+
+When developing Python applications, encountering errors is part of the process, especially when dealing with complex frameworks like Django. To streamline debugging, I've added a script that formats and presents errors in a more digestible manner. By running the command `:TerminalErrors` within Neovim, the script generates a quicklist of all the files where errors occurred, along with the specific line numbers. This feature is particularly helpful for quickly pinpointing and resolving import errors or other common issues that might halt development.
+
+### PowerShell Tree Command
+
+Navigating project directories and sharing their structures can be cumbersome at times. To address this, I've created a PowerShell tree command that integrates with Neovim. By typing `:Tree {MaxDepth}` in the command line, I can easily generate and visualize the directory tree of the current project up to the specified depth. This command is not only useful for my own navigation but also allows me to effectively communicate the project structure to fellow developers on the team.
+
 ## Acknowledgements
 
 A special thanks to the creators and contributors of the plugins and tools used in this setup. Your work is greatly appreciated and has been instrumental in refining my development environment.
