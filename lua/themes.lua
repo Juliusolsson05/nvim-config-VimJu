@@ -1,2 +1,2 @@
 -- The installed themes
-local themes = require("themes.monokai")
+local themes = require("themes.tokyonight")

@@ -8,6 +8,12 @@ function M.setup()
   -- NvimTree
   map('n', '<leader>r', ':NvimTreeToggle<CR>', opts)
 
+
+  -- LSP hover documentation
+  map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+  -- LSP signature help
+  map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   -- Config file
   map('n', '<leader>cf', ':edit $MYVIMRC<CR>', opts)
 

@@ -2,13 +2,48 @@ local M = {}
 
 function M.setup()
   local lspconfig = require('lspconfig')
+  local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-  -- Example LSP setup for Python using pyright
-  lspconfig.pyright.setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Enhance the default LSP capabilities with nvim-cmp's capabilities
+  local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  
+  -- Add additional LSP capabilities that support more features
+  capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.preselectSupport = true
+  capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+  capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+  capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+  capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+  capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      'documentation',
+      'detail',
+      'additionalTextEdits',
+    },
   }
 
-  -- Add other LSP servers here
+  -- Setup LSP servers
+  -- Here we setup pyright, you can add more servers using lspconfig.<server>.setup
+  lspconfig.pyright.setup({
+    capabilities = capabilities, -- Add enhanced capabilities
+    on_attach = function(client, bufnr)
+      -- on_attach will allow us to configure buffer specific key mappings
+      -- You can add your key mappings here if needed, but as you said, keybinds go elsewhere
+    end,
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          typeCheckingMode = "strict" -- Can be "off", "basic", or "strict"
+        }
+      }
+    }
+  })
+
+  -- Add additional LSP server setups here if needed
 end
 
 return M
