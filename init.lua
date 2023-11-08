@@ -19,6 +19,7 @@ require('packer').startup(function(use)
   -- Themes
   use 'polirritmico/monokai-nightasty.nvim'
   use 'folke/tokyonight.nvim'
+  use 'shaunsingh/nord.nvim'
 
   -- LSP
   use 'neovim/nvim-lspconfig'
@@ -63,6 +64,7 @@ require('packer').startup(function(use)
   use 'williamboman/mason-lspconfig.nvim'
 
   -- Other plugins
+  use 'preservim/tagbar'
   use 'petertriho/nvim-scrollbar'
   use 'vim-scripts/RltvNmbr.vim'
   use {
@@ -99,7 +101,7 @@ require('configs.settings').setup()
 -- Keybindings
 require('configs.keybindings').setup()
 
--- All custom written plugins
+-- All custom written plugins along with theme configuration
 local plugins = require('plugins')
 local themes = require("themes")
 

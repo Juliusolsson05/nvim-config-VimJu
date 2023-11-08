@@ -1,6 +1,5 @@
 require("monokai-nightasty").setup({
-    dark_style_background = "transparent",
-    light_style_background = "transparent",
+    dark_style_background = "transparent", 
     terminal_colors = true,
     color_headers = true,
     hl_styles = {
@@ -17,7 +16,6 @@ require("monokai-nightasty").setup({
     lualine_style = "dark",
     on_colors = function(colors)
         colors.border = colors.grey
-        colors.comment = "#2d7e79"
     end,
     on_highlights = function(highlights, colors)
         highlights.TelescopeNormal = { fg = colors.magenta, bg = colors.charcoal }
