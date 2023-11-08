@@ -10,6 +10,8 @@ function M.setup()
   vim.opt.number = true
   vim.opt.relativenumber = true
 
+  vim.api.nvim_command('hi Nordwebb guifg=#33ccff gui=bold')
+
   -- Highlighting on yank
   vim.cmd [[
     augroup YankHighlight

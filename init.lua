@@ -23,7 +23,15 @@ require('packer').startup(function(use)
 
   -- LSP
   use 'neovim/nvim-lspconfig'
-  
+
+
+
+use {
+  'kyazdani42/nvim-web-devicons',
+  config = function() require'nvim-web-devicons'.setup() end
+}
+
+
   -- Lualine
   use {
     'nvim-lualine/lualine.nvim',
@@ -63,6 +71,8 @@ require('packer').startup(function(use)
   }
   use 'williamboman/mason-lspconfig.nvim'
 
+    use 'goolord/alpha-nvim'
+
   -- Other plugins
   use 'preservim/tagbar'
   use 'petertriho/nvim-scrollbar'
@@ -83,7 +93,7 @@ require('packer').startup(function(use)
     config = function() require('gitsigns').setup() end
   }
   use 'windwp/nvim-autopairs'
-  use 'Yggdrsoot/indentLine'
+  use 'Yggdroot/indentLine'
   use {
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -94,6 +104,8 @@ end)
 -- LSP and completion configuration
 require('configs.lsp-config').setup()
 require('configs.completion-config').setup()
+
+require("configs.dashboard-config").setup()
 
 -- General Neovim settings
 require('configs.settings').setup()

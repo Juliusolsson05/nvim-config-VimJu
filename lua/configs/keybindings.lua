@@ -4,7 +4,7 @@ function M.setup()
   -- Keybindings
   local map = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
-
+  local flash = require("flash")
   -- NvimTree
   map('n', '<leader>r', ':NvimTreeToggle<CR>', opts)
 
@@ -12,9 +12,12 @@ function M.setup()
   map('n', '<leader>cf', ':edit $MYVIMRC<CR>', opts)
 
   -- LSP
-  map('n', 'P', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  map('n', '<leader>P', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
-  -- Telescope
+  -- Flash
+  vim.api.nvim_set_keymap('n', '<leader>fr', "<cmd>lua require('flash').treesitter()<CR>", { noremap = true })
+  
+    -- Telescope
   map('n', '<leader>ff', ':Telescope find_files<CR>', opts)
   map('n', '<leader>fg', ':Telescope live_grep<CR>', opts)
   map('n', '<leader>fb', ':Telescope buffers<CR>', opts)

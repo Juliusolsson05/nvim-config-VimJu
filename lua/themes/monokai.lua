@@ -1,5 +1,5 @@
 require("monokai-nightasty").setup({
-    dark_style_background = "transparent", 
+--    dark_style_background = "transparent", 
     terminal_colors = true,
     color_headers = true,
     hl_styles = {
