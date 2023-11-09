@@ -15,7 +15,7 @@ bootstrap_packer()
 require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
-
+  use 'rafi/awesome-vim-colorschemes'
   -- Themes
   use 'polirritmico/monokai-nightasty.nvim'
   use 'folke/tokyonight.nvim'
@@ -69,8 +69,7 @@ use {
   }
   use 'williamboman/mason-lspconfig.nvim'
 
-    use 'goolord/alpha-nvim'
-
+use 'glepnir/dashboard-nvim'
   -- Other plugins
   use 'preservim/tagbar'
   use 'petertriho/nvim-scrollbar'
@@ -102,6 +101,8 @@ end)
 -- LSP and completion configuration
 require('configs.lsp-config').setup()
 require('configs.completion-config').setup()
+
+require("configs.telescope-themes-config").setup()
 
 require("configs.dashboard-config").setup()
 
