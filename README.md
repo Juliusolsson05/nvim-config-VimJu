@@ -30,7 +30,7 @@ To use this configuration:
 ## Customization
 
 Feel free to fork this repository and customize the configuration to fit your workflow. The setup is modular, making it easy to add or remove components as needed.
-![VimJu color theme](VimJu.jpg "Color Theme")
+![VimJu color theme](VimJu-theme.png "Color Theme")
 
 ## Connect with Me
 
