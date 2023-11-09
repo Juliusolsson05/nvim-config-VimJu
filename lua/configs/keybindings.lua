@@ -8,7 +8,6 @@ function M.setup()
   -- NvimTree
   map('n', '<leader>r', ':NvimTreeToggle<CR>', opts)
 
-
   -- LSP hover documentation
   map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 

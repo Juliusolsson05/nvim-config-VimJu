@@ -37,9 +37,9 @@
     {
         "defaults": 
         {
-            "backgroundImage": "C:/Users/juliu/Desktop/terminal_image_11.jpg ",
-            "backgroundImageOpacity": 0.2,
-            "colorScheme": "Tokyonight",
+            "backgroundImage": "C:/Users/juliu/Desktop/terminal_image_16.jpg ",
+            "backgroundImageOpacity": 1,
+            "colorScheme": "Monokai",
             "font": 
             {
                 "face": "Mononoki Nerd Font",
