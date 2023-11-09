@@ -68,8 +68,7 @@ use {
     config = require('configs.mason-config').setup
   }
   use 'williamboman/mason-lspconfig.nvim'
-
-use 'glepnir/dashboard-nvim'
+  use 'goolord/alpha-nvim'
   -- Other plugins
   use 'preservim/tagbar'
   use 'petertriho/nvim-scrollbar'

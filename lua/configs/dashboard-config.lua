@@ -1,46 +1,72 @@
--- Define a module table to return at the end
 local M = {}
 
--- Function to set up the dashboard
 function M.setup()
-  -- Import the dashboard plugin
-  local db = require('dashboard')
+  local alpha = require('alpha')
+  local dashboard = require('alpha.themes.dashboard')
+local ascii_art = {
+  [[ __  __                      _____             ]],
+  [[/\ \/\ \   __               /\___ \            ]],
+  [[\ \ \ \ \ /\_\     ___ ___  \/__/\ \   __  __  ]],
+  [[ \ \ \ \ \\/\ \  /' __` __`\   _\ \ \ /\ \/\ \ ]],
+  [[  \ \ \_/ \\ \ \ /\ \/\ \/\ \ /\ \_\ \\ \ \_\ \]],
+  [[   \ `\___/ \ \_\\ \_\ \_\ \_\\ \____/ \ \____/]],
+  [[    `\/__/   \/_/ \/_/\/_/\/_/ \/___/   \/___/ ]],
+}
 
   -- ASCII Art
-  local ascii_art = [[
- __  __                      _____             
-/\ \/\ \   __               /\___ \            
-\ \ \ \ \ /\_\     ___ ___  \/__/\ \   __  __  
- \ \ \ \ \\/\ \  /' __` __`\   _\ \ \ /\ \/\ \ 
-  \ \ \_/ \\ \ \ /\ \/\ \/\ \ /\ \_\ \\ \ \_\ \
-   \ `\___/ \ \_\\ \_\ \_\ \_\\ \____/ \ \____/
-    `\/__/   \/_/ \/_/\/_/\/_/ \/___/   \/___/ 
- ]]
-
-  -- Set the custom header
-  db.custom_header = vim.split(ascii_art, "\n")
-
-  -- Menu items
-  db.custom_center = {
-    {icon = '  ', desc = 'New file                    ', action ='DashboardNewFile'},
-    {icon = '  ', desc = 'Find file                   ', action ='Telescope find_files'},
-    {icon = '  ', desc = 'Recently used files         ', action ='Telescope oldfiles'},
-    {icon = '  ', desc = 'Configuration               ', action ='edit $MYVIMRC'},
-    {icon = '  ', desc = 'Quit NVIM                   ', action ='quit'},
+  local header = {
+    type = "text",
+    val = ascii_art,
+    opts = {
+      position = "center",
+      hl = "Nordwebb"
+    }
   }
 
-  -- Footer
-  db.custom_footer = {'Do one thing and do it well.'}
 
-  -- Highlight groups
-  vim.api.nvim_set_hl(0, 'DashboardHeader', {fg = '#ebcb8b'})
-  vim.api.nvim_set_hl(0, 'DashboardCenter', {fg = '#b48ead'})
-  vim.api.nvim_set_hl(0, 'DashboardFooter', {fg = '#a3be8c'})
+
+  -- Buttons
+  local buttons = {
+    type = "group",
+    val = {
+      dashboard.button( "e", "  New file" , ":ene <BAR> startinsert <CR>"),
+      dashboard.button( "f", "  Find file", ":Telescope find_files <CR>"),
+      dashboard.button( "r", "  Recent"   , ":Telescope oldfiles <CR>"),
+      dashboard.button( "s", "  Settings" , ":e $MYVIMRC <CR>"),
+      dashboard.button( "q", "  Quit NVIM (Out of order)", ":qa<CR>"),
+    },
+    opts = {
+      spacing = 1
+    }
+  }
+
+  -- Set header and buttons
+  dashboard.section.header = header
+  dashboard.section.buttons = buttons
+
+  -- Set footer (optional)
+  local footer = {
+    type = "text",
+    val = "Welcome to Neovim",
+    opts = {
+      position = "center",
+      hl = "Number"
+    }
+  }
+  dashboard.section.footer = footer
+
+  -- Set the layout of the dashboard sections
+  dashboard.config.layout = {
+    { type = "padding", val = 2 },
+    header,
+    { type = "padding", val = 2 },
+    buttons,
+    { type = "padding", val = 1 },
+    footer,
+  }
+
+  -- Set the modified dashboard config to alpha
+  alpha.setup(dashboard.opts)
 end
 
--- Call the setup function
-M.setup()
-
--- Return the module table
 return M
-
