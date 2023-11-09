@@ -1,6 +1,5 @@
 local M = {}
 
--- We'll need these modules from telescope
 local telescope = require('telescope')
 local finders = require('telescope.finders')
 local pickers = require('telescope.pickers')
@@ -10,7 +9,7 @@ local function select_colorscheme(colorscheme)
   local success, err = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
   if success then
     -- Write the selected colorscheme to a Lua file
-    local colorscheme_lua = vim.fn.stdpath('config') .. '/colorscheme.lua'
+    local colorscheme_lua = vim.fn.stdpath('config') .. '/theme-cache.lua'
     local file = io.open(colorscheme_lua, 'w')
     if file then
       file:write("return '" .. colorscheme .. "'")
@@ -85,7 +84,7 @@ function M.setup()
   -- telescope.load_extension('some_extension')
 
   -- Adding the `TelescopeColorschemes` command to Neovim
-  vim.api.nvim_create_user_command('TelescopeColors', M.colorscheme_selector, {})
+  vim.api.nvim_create_user_command('Colors', M.colorscheme_selector, {})
 end
 
 return M
