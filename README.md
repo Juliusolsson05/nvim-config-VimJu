@@ -1,6 +1,10 @@
-# Neovim Configuration
+# Neovim Configuration --> VimJu
 
 Hello there! 👋 I'm Julius Olsson, the creator of Nordwebb and a passionate developer from Sweden. This repository contains my personal Neovim configuration files, which I've tailored for optimal development efficiency and ease of use.
+
+The plan is to continue to develop this until it is a complete Neovim IDE
+![VimJu logo](VimJu.jpg "VimJu")
+
 
 ## About the Configuration
 
