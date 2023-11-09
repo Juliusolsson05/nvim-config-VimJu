@@ -4,6 +4,7 @@ Hello there! 👋 I'm Julius Olsson, the creator of Nordwebb and a passionate de
 
 The plan is to continue to develop this until it is a complete Neovim IDE
 ![VimJu logo](VimJu.jpg "VimJu")
+![VimJu logo](VimJu-logo.png "VimJu")
 
 
 ## About the Configuration
