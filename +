@@ -1,0 +1,2 @@
+-- Enable indentation lines by default
+vim.g.indentLine_enabled = 1

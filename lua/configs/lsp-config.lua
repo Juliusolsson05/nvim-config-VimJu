@@ -23,7 +23,6 @@ function M.setup()
       'additionalTextEdits',
     },
   }
-
   -- Setup LSP servers
   -- Here we setup pyright, you can add more servers using lspconfig.<server>.setup
   lspconfig.pyright.setup({
@@ -42,9 +41,22 @@ function M.setup()
       }
     }
   })
-
-  -- Add additional LSP server setups here if needed
-end
+-- Configure Lua LSP with auto-formatting using ast-grep
+lspconfig.lua_ls.setup({
+    on_attach = function(client, bufnr)
+        -- Enable auto-formatting on save
+        vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'AstGrepFormat()')
+        vim.api.nvim_buf_set_option(bufnr, 'formatprg', 'ast-grep fmt')
+    end,
+    settings = {
+        Lua = {
+            -- Your Lua LSP settings here
+            format = {
+                enable = true, -- Enable formatting
+            },
+        },
+    },
+})end
 
 return M
 

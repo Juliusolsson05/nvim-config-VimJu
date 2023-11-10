@@ -61,7 +61,6 @@ use {
     run = ':TSUpdate',
     config = require('configs.treesitter-config').setup
   }
-
   -- Mason
   use {
     'williamboman/mason.nvim',

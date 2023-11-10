@@ -1,1 +1,1 @@
-return 'molokayo'
+return 'molokai'

@@ -9,6 +9,8 @@ function M.setup()
   vim.opt.ignorecase = true
   vim.opt.number = true
   vim.opt.relativenumber = true
+-- Enable indentation lines by default
+vim.g.indentLine_enabled = 1
 
   vim.api.nvim_command('hi Nordwebb guifg=#0D1D40 gui=bold')
 
