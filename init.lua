@@ -29,6 +29,15 @@ use {
   config = function() require'nvim-web-devicons'.setup() end
 }
 
+  -- Comment.nvim
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
+
+
 
   -- Lualine
   use {
