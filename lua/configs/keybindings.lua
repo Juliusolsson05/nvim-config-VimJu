@@ -35,11 +35,15 @@ function M.setup()
     -- Flash
     vim.api.nvim_set_keymap("n", "<leader>fr", "<cmd>lua require('flash').treesitter()<CR>", {noremap = true})
 
+    -- Set up a keybinding to open the yank history menu
+    vim.api.nvim_set_keymap("n", "<leader>y", ":Telescope yank_history<CR>", { noremap = true, silent = true })
+
     -- Telescope
     map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
     map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
     map("n", "<leader>fb", ":Telescope buffers<CR>", opts)
     map("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
+
 
     -- Buffer navigation
     map("n", "<TAB>", ":BufferNext<CR>", opts)

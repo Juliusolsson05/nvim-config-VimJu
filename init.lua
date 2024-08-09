@@ -38,6 +38,33 @@ use {
   }
 
 
+  -- Yanky.nvim and Telescope integration
+    use {
+      'gbprod/yanky.nvim',
+      requires = {
+        'nvim-telescope/telescope.nvim',
+        'kkharji/sqlite.lua'
+      },
+      config = function()
+        require('yanky').setup({
+          ring = {
+            history_length = 100,
+            storage = "sqlite",
+            storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db",
+          },
+          picker = {
+            select = {
+              action = nil, -- Use default put action
+            },
+            telescope = {
+              mappings = nil -- Use default mappings
+            }
+          }
+        })
+        require("telescope").load_extension("yank_history")
+      end
+    }
+
 
   -- Lualine
   use {
